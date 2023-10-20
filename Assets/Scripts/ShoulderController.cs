@@ -9,6 +9,9 @@ public class ShoulderController : MonoBehaviour
     private Transform _camera;
     private Transform _lookAtTransform;
 
+    public GameObject normalCamera;
+    public GameObject aimCamera;
+
     private float _horizontal;
     private float _vertical;
 
@@ -44,6 +47,18 @@ public class ShoulderController : MonoBehaviour
 
         Movement();
         Jump();
+
+        if(Input.GetButton("Fire2"))
+        {
+            normalCamera.SetActive(false);
+            aimCamera.SetActive(true);
+        }
+
+        else
+        {
+            normalCamera.SetActive(true);
+            aimCamera.SetActive(false);
+        }
     }
 
     void Jump()
