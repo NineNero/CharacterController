@@ -74,6 +74,14 @@ public class ShoulderController : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(0, xAxis.Value, 0);
         _lookAtTransform.eulerAngles = new Vector3(yAxis.Value, xAxis.Value, 0);
-    }
 
+        if(move != Vector3.zero)
+        {
+            float targetAngle = Mathf.Atan2(move.x, move.z) * Mathf.Rad2Deg + _camera.eulerAngles.y;
+
+            Vector3 moveDirection = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
+
+            _controller.Move(moveDirection.normalized * _playerSpeed * Time.deltaTime);
+        }
+    }
 }
