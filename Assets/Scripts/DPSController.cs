@@ -15,8 +15,10 @@ public class DPSController : MonoBehaviour
     [SerializeField] private float _playerSpeed = 5;
     [SerializeField] private float _jumpHeight = 1;
     [SerializeField] private float _pushForce = 5;
+    [SerializeField] private float _throwForce = 10;
     private float _gravity = -9.81f;
     private Vector3 _playerGravity;
+    private bool _isAiming = false;
 
     private float turnSmoothVelocity;
     [SerializeField] float turnSmoothTime = 0.1f;
@@ -47,10 +49,12 @@ public class DPSController : MonoBehaviour
         if(Input.GetButton("Fire2"))
         {
             AimMovement();
+            _isAiming = true;
         }
         else
         {
             Movement();
+            _isAiming = false;
         }
         
         Jump();
@@ -199,5 +203,15 @@ public class DPSController : MonoBehaviour
             grabedObject.transform.SetParent(null);
             grabedObject = null;
         }
+    }
+
+    void ThrowObject()
+    {
+        Rigidbody grabedBody = grabedObject.GetComponent<Rigidbody>();
+
+        grabedBody.GetComponent<Rigidbody>().isKinematic = false;
+        grabedObject.transform.SetParent(null);
+        grabedBody.GetComponent<Rigidbody>().AddForce(_camera.transform.forward * _throwForce, ForceMode.Impulse);
+        grabedObject = null;
     }
 }
