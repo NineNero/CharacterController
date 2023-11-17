@@ -56,6 +56,11 @@ public class DPSController : MonoBehaviour
             Movement();
             _isAiming = false;
         }
+
+        if(Input.GetButtonDown("Fire1") && grabedObject != null && _isAiming)
+        {
+            ThrowObject();
+        }
         
         Jump();
         
