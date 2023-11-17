@@ -59,6 +59,11 @@ public class DPSController : MonoBehaviour
         {
             RayText();
         }
+
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            GrabObject();
+        }
     }
 
     void Movement()
